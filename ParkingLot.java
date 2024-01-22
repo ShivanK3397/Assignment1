@@ -72,7 +72,12 @@ public class ParkingLot {
 	 * @param c is the car to be parked
 	 */
 	public void park(int i, int j, Car c) {
-		// WRITE YOUR CODE HERE!
+		if(canParkAt(i, j, c)){
+			lotDesign[i][j] = c;
+		}
+		else{
+			System.out.println("Car "+ c + " cannot be parked at ("+ i +","+ j+ ")");
+		}
 	}
 
 	/**
@@ -84,8 +89,9 @@ public class ParkingLot {
 	 *         of range, or when there is no car parked at (i, j)
 	 */
 	public Car remove(int i, int j) {
-		// WRITE YOUR CODE HERE!
-		return null; // REMOVE THIS STATEMENT AFTER IMPLEMENTING THIS METHOD
+		car removed = lotDesign[i][j];
+		lotDesign[i][j] = null;
+		return removed; // REMOVE THIS STATEMENT AFTER IMPLEMENTING THIS METHOD
 
 	}
 
@@ -98,6 +104,51 @@ public class ParkingLot {
 	 * @return true if car c can park at (i, j) and false otherwise
 	 */
 	public boolean canParkAt(int i, int j, Car c) {
+		if(i < numRows && j < numSpotsPerRow){
+			if(lotDesign[i][j] == CarType.NA){
+				return false;
+			}
+			if(lotDesign[i][j] == CarType.Large){
+				
+					return true;
+				
+				}
+			else if(lotDesign[i][j] == CarType.REGULAR){
+				if(c.CarType == CarType.Large){
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+			else if(lotDesign[i][j] == CarType.SMALL){
+				if(c.CarType == CarType.LARGE || c.CarType == CarType.REGULAR){
+					return false;
+				}
+				else{
+					return true;
+				}
+			
+			}
+			else{
+				if(c.CarType == CarType.ELECTRIC){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+		}
+		else{
+			return false;
+		}
+		
+	
+	
+
+		
+		 
+		
 		// WRITE YOUR CODE HERE!
 		return false; // REMOVE THIS STATEMENT AFTER IMPLEMENTING THIS METHOD
 
@@ -108,8 +159,15 @@ public class ParkingLot {
 	 *         used for parking (i.e., excluding spots that point to CarType.NA)
 	 */
 	public int getTotalCapacity() {
+		int Ncount = 0;
+		for(CarType i: lotDesign){
+			if(i == CarType.NA){
+				Ncount ++;
+			}
+		}
+		int dimensions = (numRows * numSpotsPerRow) - Ncount ;
 		// WRITE YOUR CODE HERE!
-		return -1; // REMOVE THIS STATEMENT AFTER IMPLEMENTING THIS METHOD
+		return dimensions; // REMOVE THIS STATEMENT AFTER IMPLEMENTING THIS METHOD
 
 	}
 
@@ -118,6 +176,11 @@ public class ParkingLot {
 	 *         cars parked in the lot)
 	 */
 	public int getTotalOccupancy() {
+		int Ocheck = 0;
+		for(car i: lotDesign){
+			if 
+
+		}
 		// WRITE YOUR CODE HERE!
 		return -1; // REMOVE THIS STATEMENT AFTER IMPLEMENTING THIS METHOD		
 	}
