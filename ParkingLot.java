@@ -75,6 +75,7 @@ public class ParkingLot {
 		// WRITE YOUR CODE HERE!
 		if(canParkAt(i, j, c)){
 			occupancy[i][j] = c;
+			System.out.println(occupancy[i][j]);
 		}
 		else{
 			System.out.println("Car "+ c + " cannot be parked at ("+ i +","+ j+ ")");
@@ -114,7 +115,10 @@ public class ParkingLot {
 			if(lotDesign[i][j] == CarType.NA){
 				return false;
 			}
-			if(lotDesign[i][j] == CarType.LARGE){
+			if(occupancy[i][j] != null){
+				return false;
+			}
+			else if(lotDesign[i][j] == CarType.LARGE){
 				return true;			
 			}
 			else if(lotDesign[i][j] == CarType.REGULAR){
